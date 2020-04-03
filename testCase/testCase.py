@@ -3,11 +3,7 @@
 将表格中的数据进行接口的请求,并判断返回值是否正确
 获取测试数据，完成接口测试的请求，断言结果
 解析：
-# 1。找到刚刚存储的表格并打开
-# 2。确认/定位list
-# 3。将表格中的参数取出来
-# 4。将参数带入请求，进行请求
-# 5。判断返回值是否正确
+
 1。调用readexcel模块，获取测试数据
 
 2。根据接口测试数据，进行请求
@@ -17,6 +13,126 @@
  3。1 成功
  3。2失败
 4。写入我们的excel
+
+
+
+'''
+import unittest,json
+from ddt import unpack,data
+from ddt import  ddt
+from common.configHttp import configHttp
+from common.readExcel import readExcel
+import requests
+
+
+
+re = readExcel()
+test_data =  re.read()
+
+
+c  = configHttp()
+
+
+@ddt
+class  testCase(unittest.TestCase):
+    def setUp(self):
+        #执行case前面的初始化，
+        pass
+    #python编写测试用例必须集成unittese或者pytest
+
+
+    #id, url, name, method, value, expect, real, status =  test_data
+    #test_data[0]
+
+    @data(*test_data)
+    @unpack
+    def testRun(self,id, url, name, method, value, expect, real, status):
+        print('传入参数',id, url, name, method, value, expect, real, status)
+        #处理数据格式
+        value = value[0]
+        
+        #test_data1  = (test_data[0][1],test_data[0][3],test_data[0][4],test_data[0][6])
+        #接口地址，接口请求方法，接口参数，预期结果
+        if method == 'get' or method == 'GET':
+
+            da =  c.get(url,  value)
+            #接受数据
+            try:
+                self.assertEqual(str(da),str(expect))
+                status  =  'success'
+            except AssertionError as f:
+                status  =  'fail'
+                print(f)
+
+
+
+
+
+            #pass
+
+
+        elif method  == 'post'  or method == 'POST':
+            post1 = c.post(url,value)
+            try:
+                self.assertEqual(str(post1),str(expect))
+                #status = 'successs'
+            except  AssertionError as e:
+                print(type(e))
+                #status = 'fail'
+
+
+
+
+
+
+        elif method == 'put' or method == 'PUT':
+            pass
+        elif method == 'delete' or method  == 'DELETE':
+            pass
+
+            pass
+        # elif method  == 'put':
+        #     value = json.dumps(value)
+        #     re1 = requests.post(url=url, data=value)
+        #     real_sign1 = re1.json()['errorCode']
+        #
+        #     res = re1.status_code
+        #     self.assertEqual(real_sign1, value)
+        #     print(real_sign1)
+        #     pass
+        # assert(expect,real)
+
+
+
+
+    def tearDown(self):
+        #链接数据库，断开数据库等
+        pass
+
+
+
+
+    #return test_data
+
+
+
+
+
+
+if __name__ == '__main__':
+    #t = testCase()
+    #t.testRun()
+    #print(t.test_data)
+    #print(t.test_data1)
+    unittest.main()
+
+
+
+#unittest
+
+
+
+
 
 
 
@@ -60,3 +176,4 @@ class  testCase(unittest.TestCase):
 if __name__ == '__main__':
     tc = testCase()
     print(tc.test_data())
+'''

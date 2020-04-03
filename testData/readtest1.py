@@ -1,18 +1,1 @@
-import xlrd ,xlwt
-readbook = xlrd.open_workbook(r'data.xls')
-#读取excel
-#sheet = readbook.sheet_by_index(0)
-#定位sheet页面
-sheet = readbook.sheet_by_name('urlSheet')
-max1 = sheet.nrows
-#print(max1)
-
-for i in range(1,max1):
-    row_value = sheet.row_values(i)
-    #读取数据
-    print(row_value)
-        #row_value = sheet.row_values(i)
-
-
-
-
+import xlrd ,xlwt,osa = os.path.abspath(__file__)b = os.path.dirname(os.path.dirname(a))print(b)c = b + '/testCase/'print(c)readbook = xlrd.open_workbook(r'data.xls')#r是转移的意思#读取excelsheet = readbook.sheet_by_index(0)# print(sheet)# nrows = sheet.nrows# #最大行数# ncols = sheet.ncols# #最大列数# lng = sheet.cell(1,1)# #获取某个单元格的值# lgn = sheet.row_values(2)# ls = sheet.col_values(2)# #第而行的只# print(nrows,ncols,type(lng),lgn,ls)# sheet1 = readbook.sheet_by_name('urlSheet')# print(sheet1)# allsheetnames = readbook.sheet_names()# print(allsheetnames)#读取sheet页面#定位sheet页面# sheet = readbook.sheet_by_name('urlSheet')# max1 = sheet.nrows# #print(max1)## for i in range(1,max1):#     row_value = sheet.row_values(i)#     #读取数据#     print(row_value)#         #row_value = sheet.row_values(i)

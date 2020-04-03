@@ -9,9 +9,85 @@ import xlrd ,xlwt
 4。读取目标行的的数据格式，进行组装
 '''
 import xlrd ,xlwt,os
+path1 = os.path.abspath(__file__)
+        #print(path1)
+base_dir = os.path.dirname(os.path.dirname(path1))
+excel_dir = base_dir + '/testData/data.xls'
+#定义方法
+class readExcel(object):
+    #定位sheet页
+    def __init__(self):
+        self.readbook=xlrd.open_workbook(excel_dir)
+        self.data_list = []
+    def read(self):
+        sheet = self.readbook.sheet_by_index(0)
+       # rowdata = sheet.row_values(0)
+
+        nrow = sheet.nrows
+       # a = sheet.row_values(0)
+        #第一行
+        # print(a)
+        # print(nrow)
+        #获取行数
+        for i in range(1,nrow):
+            rowdata = sheet.row_values(i)
+            self.data_list.append(rowdata)
+
+        return self.data_list
+if __name__ == '__main__':
+    re = readExcel()
+    print(re.read())
+
+
+    # excel_dir = os.path.dirname(os.path.dirname(path1))
+    # exce = excel_dir+'/'+'testData'
+    #print(excel_dir)
+    # if not os.path.exists(excel_dir):
+    #     print('fass')
+
+    #print(open(excel_dir)
+
+# sheet = readbook.sheet_by_index(0)
+# coldatac  = sheet.col_values(0)
+# rowdata = sheet.row_values(0)
+# print(sheet,rowdata,coldatac)
+# a = xlrd.open_workbook()
+#readbook = xlrd.open_workbook(path1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 
 # 当前路径
+
 current_dir = os.path.abspath(__file__)
+#print(current_dir)
 # 路径的上个文件的路径
 base_dir = os.path.dirname(os.path.dirname(current_dir))
 excel_dir = base_dir + '/testData/data.xls'
@@ -40,3 +116,4 @@ class readExcel(object):
 if __name__ == '__main__':
     re = readExcel()
     print(re.read())
+'''

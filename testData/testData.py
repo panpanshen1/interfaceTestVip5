@@ -5,3 +5,6 @@
 # print(dict1['id'][2])
 '''
 '''
+import os
+path = '/Users/shenpanpanpan/Desktop/未命名文件夹/第二天/1.txt'
+print(os.getcwd())
